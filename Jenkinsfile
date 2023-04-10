@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout git') {
             steps {
-               git branch: 'master', url: 'https://github.com/ahmedsch7/test.git'
+               git branch: 'master', url: 'https://github.com/ahmedsch7/spring-test.git'
             }
         }
         stage('UNIT testing'){
