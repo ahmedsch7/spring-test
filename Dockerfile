@@ -12,7 +12,7 @@ RUN mvn install
 
 
 # Docker Build Stage
-FROM openjdk:11.0
+FROM openjdk:
 
 COPY --from=build /opt/app/target/*.jar app.jar
 
