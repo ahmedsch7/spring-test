@@ -45,9 +45,8 @@ pipeline {
                 
                 script{
                     
-                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                    sh 'docker image build $JOB_NAME:v1.$BUILD_ID ahmedschheider/$JOB_NAME:v1.$BUILD_ID'
-                    sh 'docker image build $JOB_NAME:v1.$BUILD_ID ahmedschheider/$JOB_NAME:latest'
+                    sh 'docker image build -t ahmedschheider/devops:v1.18 .'
+                   
                 }
             }
         } 
@@ -56,10 +55,10 @@ pipeline {
              steps{
                 
                 script{
-                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'DOCKERHUBPWD')]) {
+                    withCredentials([string(credentialsId: 'dockerhub-PWD', variable: 'DOCKERHUBPWD')]) {
                                             sh 'docker login -u ahmedschheider -p ${DOCKERHUBPWD}'
-                                            sh 'docker image push ahmedschheider/$JOB_NAME:v1.$BUILD_ID'
-                                            sh 'docker image push ahmedschheider/$JOB_NAME:latest'
+                                            sh 'docker image push ahmedschheider/devops:v1.18 '
+                                        
                                             }
                 }
             }
@@ -70,9 +69,9 @@ pipeline {
                 
                 script{
                     sh'''
-                    docker run -d -p 9090:8080 ahmedschheider/$JOB_NAME:latest '''
+                    docker run -d -p 5000:8081 ahmedschheider/devops:v1.18 '''
                 }
             }
         } 
     }
-}
+}  
