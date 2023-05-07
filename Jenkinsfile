@@ -87,5 +87,26 @@ pipeline {
                 }
             }
         } 
+ 
+       stage('Replace and Run New Container') {
+            steps {
+                 script {
+                     // Replace the existing container on the VM
+                     sshagent(['my-ssh-key']) {
+                        sh 'ssh user@vm-address "docker stop my-container && docker rm my-container"'
+                     }
+
+                     // Pull the new container from DockerHub
+                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                     docker.pull('my-docker-image:latest')
+                     }
+
+                     // Run the new container on the VM
+                     sshagent(['my-ssh-key']) {
+                     sh 'ssh user@vm-address "docker run -d --name my-container -p 8080:80 my-docker-image:latest"'
+                     }
+             }
+         }
+     }
     }
 }  
