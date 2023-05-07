@@ -105,7 +105,7 @@ pipeline {
                             docker stop $dockerName && docker rm $dockerName 
                          fi
                          # run remote container
-                         docker run -t -p 5002:8081 --name $dockerName $dockerImageName
+                         docker run -d -p 5002:8081 --name $dockerName $dockerImageName
                         '   
                         '''.stripIndent())
                         //sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a" '
