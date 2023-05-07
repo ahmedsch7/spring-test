@@ -101,16 +101,11 @@ pipeline {
                          
                          dockerName='c2container'
                          dockerImageName='ahmedschheider/devops:v1.18'
-                         if [ ! "$(docker ps -q -f name=$dockerName)" ]; then
-                            if [ "$(docker ps -aq -f status=exited -f name=$dockerName)" ]; then
-                               # cleanup
-                               docker rm $dockerName
-                            fi
-                            # run remote container
-                            docker run -t -p 5002:8081 --name $dockerName $dockerImageName
+                         if [ "$(docker ps -q -f name=$dockerName)" ]; then
+                            docker stop $dockerName && docker rm $dockerName 
                          fi
- 
-                         
+                         # run remote container
+                         docker run -t -p 5002:8081 --name $dockerName $dockerImageName
                         '   
                         '''.stripIndent())
                         //sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a" '
