@@ -96,7 +96,7 @@ pipeline {
                      // connecting to production VM
                     sshagent(['ssh-key']) {
                         sh (returnStdout:true, script: '''#!/bin/bash
-                         ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a"
+                         ssh -o StrictHostKeyChecking=no root@167.99.153.105
                          echo $CNAME 
                          export CNAME=container-$RANDOM 
                          echo $CNAME   
