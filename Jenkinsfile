@@ -105,6 +105,7 @@ pipeline {
                             docker stop $dockerName && docker rm $dockerName 
                          fi
                          # run remote container
+                         docker pull $dockerImageName   
                          docker run -d -p 5002:8081 --name $dockerName $dockerImageName
                         '   
                         '''.stripIndent())
