@@ -91,9 +91,17 @@ pipeline {
        stage('deploy to production') {
             steps {
                 script {
+                    
+                
                      // connecting to production VM
                     sshagent(['ssh-key']) {
-                        sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a" '
+                        sh (returnStdout:true, script: '''#!/bin/bash
+                         ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a"
+                         echo $CNAME 
+                         export CNAME=container-$RANDOM 
+                         echo $CNAME   
+                        '''.stripIndent())
+                        //sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a" '
 
                     }
                     //sh 'ssh user@vm-address "docker stop my-container && docker rm my-container"'
