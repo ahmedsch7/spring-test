@@ -94,6 +94,7 @@ pipeline {
                      // connecting to production VM
                     sshagent(['ssh-key']) {
                         sh 'ssh root@167.99.153.105 "uname -a"'
+                        
                     }
                     //sh 'ssh user@vm-address "docker stop my-container && docker rm my-container"'
                      // Pull the new container from DockerHub
