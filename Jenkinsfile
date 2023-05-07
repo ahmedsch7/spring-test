@@ -77,16 +77,16 @@ pipeline {
                 }
             }
         } 
-        stage('Deloy'){
+        //stage('Deloy'){
             
-            steps{
+            //steps{
                 
-                script{
-                    sh'''
-                    docker run -d -p 5001:8081 ahmedschheider/devops:v1.18 '''
-                }
-            }
-        } 
+                //script{
+                    //sh'''
+                    //docker run -d -p 5001:8081 ahmedschheider/devops:v1.18 '''
+                //}
+            //}
+        //} 
  
        stage('deploy to production') {
             steps {
@@ -94,7 +94,7 @@ pipeline {
                      // connecting to production VM
                     sshagent(['ssh-key']) {
                         sh 'ssh root@167.99.153.105 "uname -a"'
-                        
+
                     }
                     //sh 'ssh user@vm-address "docker stop my-container && docker rm my-container"'
                      // Pull the new container from DockerHub
