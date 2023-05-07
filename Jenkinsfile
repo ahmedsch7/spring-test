@@ -39,6 +39,20 @@ pipeline {
                 }
             }
         }
+        stage('Static code analysis'){
+            
+            steps{
+                
+                script{
+                    
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                        
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                   }
+                    
+                }
+        }
         stage('Docker Image Build'){
             
             steps{
@@ -69,7 +83,7 @@ pipeline {
                 
                 script{
                     sh'''
-                    docker run -d -p 5000:8081 ahmedschheider/devops:v1.18 '''
+                    docker run -d -p 5001:8081 ahmedschheider/devops:v1.18 '''
                 }
             }
         } 
