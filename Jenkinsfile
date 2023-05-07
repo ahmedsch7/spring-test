@@ -9,36 +9,36 @@ pipeline {
                git branch: 'master', url: 'https://github.com/ahmedsch7/spring-test.git'
             }
         }
-        // stage('UNIT testing'){
+        stage('UNIT testing'){
             
-        //     steps{
+            steps{
                 
-        //         script{
+                script{
                     
-        //             sh 'mvn test'
-        //         }
-        //     }
-        // } 
-        // stage('Integration testing'){
+                    sh 'mvn test'
+                }
+            }
+        } 
+        stage('Integration testing'){
             
-        //     steps{
+            steps{
                 
-        //         script{
+                script{
                     
-        //             sh 'mvn verify -DskipUnitTests'
-        //         }
-        //     }
-        // }
-        // stage('Maven build'){
+                    sh 'mvn verify -DskipUnitTests'
+                }
+            }
+        }
+        stage('Maven build'){
             
-        //     steps{
+            steps{
                 
-        //         script{
+                script{
                     
-        //             sh 'mvn clean install'
-        //         }
-        //     }
-        // }
+                    sh 'mvn clean install'
+                }
+            }
+        }
 //         stage('Static code analysis'){
             
 //             steps{
@@ -53,30 +53,30 @@ pipeline {
                     
 //                 }
 //         }
-        // stage('Docker Image Build'){
+        stage('Docker Image Build'){
             
-        //     steps{
+            steps{
                 
-        //         script{
+                script{
                     
-        //             sh 'docker image build -t ahmedschheider/devops:v1.18 .'
+                    sh 'docker image build -t ahmedschheider/devops:v1.18 .'
                    
-        //         }
-        //     }
-        // } 
-        // stage('push image to the dockerhub'){
+                }
+            }
+        } 
+        stage('push image to the dockerhub'){
             
-        //      steps{
+             steps{
                 
-        //         script{
-        //             withCredentials([string(credentialsId: 'dockerhub-PWD', variable: 'DOCKERHUBPWD')]) {
-        //                                     sh 'docker login -u ahmedschheider -p ${DOCKERHUBPWD}'
-        //                                     sh 'docker image push ahmedschheider/devops:v1.18 '
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub-PWD', variable: 'DOCKERHUBPWD')]) {
+                                            sh 'docker login -u ahmedschheider -p ${DOCKERHUBPWD}'
+                                            sh 'docker image push ahmedschheider/devops:v1.18 '
                                         
-        //                                     }
-        //         }
-        //     }
-        // } 
+                                            }
+                }
+            }
+        } 
         //stage('Deloy'){
             
             //steps{
