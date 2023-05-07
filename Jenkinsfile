@@ -93,7 +93,7 @@ pipeline {
                 script {
                      // connecting to production VM
                     sshagent(['ssh-key']) {
-                        sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 '
+                        sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a" '
 
                     }
                     //sh 'ssh user@vm-address "docker stop my-container && docker rm my-container"'
