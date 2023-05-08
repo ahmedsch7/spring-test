@@ -101,12 +101,12 @@ pipeline {
                          
                          dockerName='c2container'
                          dockerImageName='ahmedschheider/devops:v1.18'
-                         if [ "$(docker ps -q -f name=$dockerName)" ]; then
+                         if [ "$(docker ps -aq -f name=$dockerName)" ]; then
                             docker stop $dockerName && docker rm $dockerName 
                          fi
                          # run remote container
                          docker pull $dockerImageName   
-                         docker run -d -p 5002:8081 --name $dockerName $dockerImageName
+                         docker run --rm -d -p 5002:8081 --name $dockerName $dockerImageName
                         '   
                         '''.stripIndent())
                         //sh  'ssh -o StrictHostKeyChecking=no root@167.99.153.105 "uname -a" '
