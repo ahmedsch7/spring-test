@@ -15,7 +15,7 @@ public class DemoDeployApplication {
 
 	@GetMapping("/")
 	public String home(){
-		return "Welcome Home test1";
+		return "Welcome Home test2";
 	}
 
 }
